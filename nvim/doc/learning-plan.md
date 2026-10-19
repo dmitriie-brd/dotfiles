@@ -30,13 +30,13 @@ This file is in the config git repo, so you can commit your progress.
 
 ## Week 0 (days 1–2): Orientation
 
-- [ ] `:Tutor` (lesson 1, ~30 min). Then `:Tutor vim-02-beginner` (lesson 2).
-- [ ] Learn the help system: `:h usr_02`. In help, `<C-]>` follows a link, `<C-o>` goes back, `gO` shows the outline.
+- [x] `:Tutor` (lesson 1, ~30 min). Then `:Tutor vim-02-beginner` (lesson 2).
+- [x] Learn the help system: `:h usr_02`. In help, `<C-]>` follows a link, `<C-o>` goes back, `gO` shows the outline.
       `<leader>fh` searches all help pages.
-- [ ] Press `<leader>` and wait. Read every group in the which-key popup. Do the same for `g`, `]`, `[`, `z`.
-- [ ] Read cheatsheet sections 1 (grammar) and 19 (changed built-in keys).
-- [ ] Check kitty: the icons look correct, `<A-j>` moves a line, `<C-/>` opens a terminal.
-- [ ] Run `:Drill` once and look at the sandbox.
+- [x] Press `<leader>` and wait. Read every group in the which-key popup. Do the same for `g`, `]`, `[`, `z`.
+- [x] Read cheatsheet sections 1 (grammar) and 19 (changed built-in keys).
+- [x] Check kitty: the icons look correct, `<A-j>` moves a line, `<C-/>` opens a terminal.
+- [x] Run `:Drill` once and look at the sandbox.
 
 ---
 

@@ -10,8 +10,8 @@ local m = require('helpers.map')
 local nmap, xmap = m.nmap, m.xmap
 local root = function() return require('zon.root').get() end
 
--- Never search build trees, CVS metadata, deps, objects.
-local excludes = { 'CVS', 'build.*', 'node_modules', 'target', '*.o', '*.timestamp', '.git' }
+-- Never search build trees, CVS metadata and merge backups (.#file), deps, objects.
+local excludes = { 'CVS', '.#*', 'build.*', 'node_modules', 'target', '*.o', '*.timestamp', '.git' }
 local fd_ex, rg_ex = {}, {}
 for _, e in ipairs(excludes) do
     table.insert(fd_ex, '--exclude ' .. vim.fn.shellescape(e))
@@ -50,7 +50,9 @@ fzf.setup({
     },
     files = {
         cwd_prompt = false,
-        formatter = 'path.filename_first',
+        -- Full paths (no filename-first formatter): pasted paths like pkg/a/b.js match.
+        -- On equal scores, prefer matches in the file name part, then shorter paths.
+        fzf_opts = { ['--tiebreak'] = 'pathname,length' },
         fd_opts = '--color=never --hidden --type f --type l --follow ' .. table.concat(fd_ex, ' '),
     },
     grep = {
@@ -58,7 +60,6 @@ fzf.setup({
             .. '--max-filesize=2M --hidden '
             .. table.concat(rg_ex, ' ')
             .. ' -e',
-        formatter = 'path.filename_first',
     },
     oldfiles = { include_current_session = true },
     lsp = { includeDeclaration = false, jump1 = true },
