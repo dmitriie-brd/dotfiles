@@ -64,7 +64,7 @@ Examples: `d2w` (delete 2 words), `c$` (change to end of line), `y}` (yank to pa
 | `gg` / `G` / `42G` / `:42` | first line / last line / line 42 |
 | `{` / `}` | previous / next empty line (paragraph) |
 | `%` | matching `()[]{}` |
-| `H` / `M` / `L` | top / middle / bottom of the screen |
+| `M` | middle of the screen (`H` / `L` = previous / next buffer here, see section 9) |
 | `<C-d>` / `<C-u>` | half page down / up |
 | `<C-f>` / `<C-b>` | full page down / up |
 | `zz` / `zt` / `zb` | scroll so the cursor line is in the center / top / bottom |
@@ -292,12 +292,21 @@ Fuzzy syntax: `foo bar` (both), `'exact`, `^start`, `end$`, `!not`.
 `g?` help, `<CR>`/`o` open, `<C-v>` vsplit, `a` add (end with `/` for a folder), `d` delete,
 `r` rename, `x`/`c`/`p` cut/copy/paste, `y` copy name, `Y` copy relative path, `H` dotfiles, `-` up, `q` close.
 
-### Buffers
+### Buffers (the line at the top) [C]
+A **buffer** is an open file. Opening a file (`<leader><Space>`, `gf`, `gd`, `:e`) shows it in the current window
+and adds it to the buffer line at the top. The old file stays open there. This is what LazyVim calls "tabs".
+
 | Keys | Action |
 |---|---|
-| `<C-^>` or `<leader>bb` | switch to the alternate (previous) buffer |
-| `]b` / `[b` [B] | next / previous buffer |
-| `<leader>bd` / `<leader>bo` [C] | delete this buffer (window stays) / delete all other buffers |
+| `<S-h>` / `<S-l>` | previous / next buffer in the line |
+| `<C-^>` or `<leader>bb` | switch to the alternate (last used) buffer |
+| `<leader>bj` | pick a buffer: each one gets a letter, type it |
+| `<leader>,` | search the open buffers (fuzzy) |
+| `<leader>bp` / `<leader>bP` | pin / unpin this buffer / close all buffers that are not pinned |
+| `<leader>bl` / `<leader>br` | close the buffers to the left / right |
+| `<leader>b[` / `<leader>b]` | move this buffer left / right in the line |
+| `<leader>bd` / `<leader>bo` | close this buffer (window stays) / close all other buffers |
+| `]b` / `[b` [B] | next / previous buffer (by number, not by line order) |
 | `:w` `:wa` (`<leader>qw`) `:e!` | write / write all / reload from disk (drop changes) |
 | `ZZ` / `ZQ` / `<leader>qq` | write and quit / quit without saving / quit all |
 
@@ -311,9 +320,11 @@ Fuzzy syntax: `foo bar` (both), `'exact`, `^start`, `end$`, `!not`.
 | `<C-w>H` `J` `K` `L` | move the window to the far left / bottom / top / right |
 | `-` `=` / `_` `+` [C] | height − / + , width − / + |
 
-### Tabs
-`gt` / `gT` next / previous tab, `3gt` tab 3, `:tabnew`, `:tabclose`, `<C-w>T` window to tab.
-CVS diffs open in their own tab: close them with `q` or `:tabclose`.
+### Tab pages
+A **tab page** is a layout of windows (like a virtual desktop), not one file. When there are 2 or more,
+their numbers show at the right end of the top line.
+`gt` / `gT` next / previous tab page, `3gt` tab page 3, `:tabnew`, `:tabclose`, `<C-w>T` window to a new tab page.
+The cheatsheet, the generated keymaps and CVS diffs open in their own tab page: close them with `q` or `:tabclose`.
 
 ### Sessions [C]
 `<leader>qs` restore the session for this folder, `<leader>ql` the last one, `<leader>qS` select one, `<leader>qd` do not save this session.
@@ -544,6 +555,7 @@ Clippy runs on save. The file is formatted with rustfmt on save (`<leader>tf` = 
 | `=` | re-indent operator | window height | `<leader>=` (in visual mode `=` still works) |
 | `<C-l>` | redraw + clear search + diffupdate | window right | `<Esc>` clears the search, `:diffupdate` |
 | `<C-h>` `<C-j>` `<C-k>` | left / down / (nothing) | window moves | `h` `j` |
+| `H` / `L` | top / bottom line of the screen | previous / next buffer | `zt` / `zb` + `M`, `<C-u>` / `<C-d>`, leap |
 | `]a` / `[a` | next / previous file in the arglist | next / previous argument | `:next` / `:prev` |
 | `]t` / `[t` | tag stack | TODO comments | `:tnext` / `:tprev` |
 | `]]` / `[[` | next / previous section | next / previous LSP reference (markdown: headings) | — |

@@ -45,7 +45,7 @@ This file is in the config git repo, so you can commit your progress.
 (`7j`), `}`, `/search`, `f`, or leap (`s`).
 
 Learn (cheatsheet section 2): `hjkl` with counts, `w b e W B E`, `0 ^ $`, `f t F T ; ,`, `gg G 42G`,
-`{ }`, `%`, `H M L`, `<C-d> <C-u>`, `zz zt`, `/ ? n N * #`, leap `s` / `S`, `<C-o>` / `<C-i>`.
+`{ }`, `%`, `M`, `<C-d> <C-u>`, `zz zt`, `/ ? n N * #`, leap `s` / `S`, `<C-o>` / `<C-i>`.
 Read: `:h usr_03`.
 
 Drills (in `~/nvim-drill/date.js`):
@@ -56,7 +56,8 @@ Drills (in `~/nvim-drill/date.js`):
 - [ ] Use only relative numbers: reach 10 lines on the screen with `{count}j` / `{count}k`.
 - [ ] Leap game: choose 10 random words on the screen. Reach each in at most 4 keys (`s` + 2 chars + label).
 - [ ] `*` on `pad` → walk all uses with `n` / `N`. Then `]]` / `[[` (LSP references) do the same.
-- [ ] `H`, `M`, `L`, `<C-d>`, `<C-u>`, `zz`, `zt`: read the whole file without `j`/`k`.
+- [ ] `M`, `<C-d>`, `<C-u>`, `zz`, `zt`, `zb`: read the whole file without `j`/`k`.
+      (`H` / `L` are not screen top / bottom here: they switch buffers, see Week 3.)
 
 Self-test (end of week):
 - [ ] Any visible place in ≤ 4 keys.
@@ -97,10 +98,11 @@ Self-test:
 ## Week 3: Navigate the project
 
 **Habit: never open a file from the tree or by typing a path.** Use `<leader><Space>`, `gd`, `gf`, `<C-^>`, `<leader>fr`.
+Switch between open files with `<S-h>` / `<S-l>` (the buffer line at the top), `<C-^>` and `<leader>,`.
 Use the tree (`<leader>e`) only to look at a folder.
 
 Learn (cheatsheet sections 9, 10): `<leader><Space>`, `<leader>/`, `<leader>fr`, `<leader>,`, `<leader>fR`,
-picker keys (`<Tab>`, `<C-q>`, `<C-v>`), `gd grr gri K gO <leader>ss`, `<leader>cp`, `<C-o>` / `<C-i>`, `<C-^>`,
+picker keys (`<Tab>`, `<C-q>`, `<C-v>`), `gd grr gri K gO <leader>ss`, `<leader>cp`, `<C-o>` / `<C-i>`, `<C-^>`, `<S-h>` / `<S-l>`, `<leader>bj`, `<leader>bo`,
 `gf` / `gF`, `:A`, global marks `mA` / `` `A ``, `]q` / `[q`.
 Read: `:h usr_07`, `:h usr_29`.
 
@@ -115,6 +117,9 @@ Drills (in the real `~/zon1`, read only):
 - [ ] Set `mD` in `date.js` and `mE` in `etask.js`. Jump between them from any file with `` `D `` / `` `E ``.
 - [ ] Type `pkg/util/date.js:139` in a scratch buffer (`<leader>bn`). Put the cursor on it and press `gF`.
 - [ ] `<leader>fr` (recent files) and `<leader>,` (buffers): use them instead of the tree for one day.
+- [ ] Open 6 files. Move with `<S-h>` / `<S-l>`, jump with `<leader>bj` + letter, pin one with `<leader>bp`,
+      then `<leader>bP` (close the unpinned ones). Understand the difference: buffers (top line, left side)
+      vs tab pages (numbers at the right end, `gt` / `gT`).
 - [ ] `<leader>fR`: run a grep, close it, open it again with the same results.
 
 Self-test:
