@@ -1,0 +1,7 @@
+# Ignore everything in the repo root
+/*
+
+# Whitelist these
+!/.gitignore
+!/kitty/
+!/nvim/

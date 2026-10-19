@@ -1,0 +1,56 @@
+{
+  "zon node header": {
+    "prefix": "zhdr",
+    "body": ["// LICENSE_CODE ZON", "'use strict'; /*jslint node:true, es9:true*/", "const E = exports;", "$0"],
+    "description": "zon node module header (:ZonHeader computes require paths)"
+  },
+  "zon browser header": {
+    "prefix": "zhdrb",
+    "body": ["// LICENSE_CODE ZON", "'use strict'; /*jslint browser:true, es9:true*/", "$0"]
+  },
+  "zon react header": {
+    "prefix": "zhdrr",
+    "body": ["// LICENSE_CODE ZON", "'use strict'; /*jslint react:true*/", "$0"]
+  },
+  "etask arrow": {
+    "prefix": "etask",
+    "body": ["const ${1:name} = (${2})=>etask(function*(){", "    $0", "});"],
+    "description": "const f = a=>etask(function*(){ ... });"
+  },
+  "etask named (exported API)": {
+    "prefix": "etaskn",
+    "body": ["E.${1:name} = (${2})=>etask(function*${1:name}(){", "    $0", "});"]
+  },
+  "etask yield": {
+    "prefix": "ry",
+    "body": ["return yield ${0}"]
+  },
+  "require local": {
+    "prefix": "zreq",
+    "body": ["const ${1:name} = require('${2:../util/}${1:name}.js');"]
+  },
+  "describe": {
+    "prefix": "zdesc",
+    "body": ["describe('${1:name}', function(){", "    $0", "});"]
+  },
+  "zdescribe": {
+    "prefix": "zdescribe",
+    "body": ["zdescribe('${1:BASE}')('${2:name}', ()=>{", "    $0", "});"]
+  },
+  "it": {
+    "prefix": "zit",
+    "body": ["it('${1:name}', ()=>{", "    $0", "});"]
+  },
+  "it etask": {
+    "prefix": "zite",
+    "body": ["it('${1:name}', ()=>etask(function*(){", "    $0", "}));"]
+  },
+  "XXX comment": {
+    "prefix": "xxx",
+    "body": ["// XXX dmitriie: ${0}"]
+  },
+  "test exports": {
+    "prefix": "zet",
+    "body": ["E.t = {${0}};"]
+  }
+}
