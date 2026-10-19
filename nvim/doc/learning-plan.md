@@ -3,7 +3,8 @@
 Goal: work in Neovim faster than in any other editor, on zon (JS), TS and Rust.
 Duration: about 8 weeks, 15–20 minutes of practice a day, plus normal work in Neovim.
 
-Open this file: `<leader>hl`. Open the cheatsheet: `<leader>hc`.
+Open this file: `<leader>hl`. Open the cheatsheet: `<leader>hc`. Both open as buffers in the current window
+(`<S-h>` / `<S-l>` switch, `q` closes).
 Mark finished items: put the cursor on `[ ]` and type `rx` (it becomes `[x]`), then `:w`.
 This file is in the config git repo, so you can commit your progress.
 

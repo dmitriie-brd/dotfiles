@@ -2,7 +2,8 @@
 
 Built for this config (Neovim 0.12, `~/.config/nvim`). `<leader>` = `Space`, `<localleader>` = `\`.
 
-- Open this file: `<leader>hc`. Open the learning plan: `<leader>hl`.
+- Open this file: `<leader>hc`. Open the learning plan: `<leader>hl`. Both open as buffers in the current window;
+  `<S-h>` / `<S-l>` switch back to your code, `q` closes the doc.
 - In this file: `gO` shows the outline, and `]]` / `[[` jump to the next / previous section.
 - Do not remember a key? Press `<leader>` and wait (which-key). Or press `<leader>fk` (search all keymaps).
 - `<leader>hk` (`:Keymaps`) generates the full list of config keymaps, with the file:line of each one.
@@ -324,7 +325,8 @@ and adds it to the buffer line at the top. The old file stays open there. This i
 A **tab page** is a layout of windows (like a virtual desktop), not one file. When there are 2 or more,
 their numbers show at the right end of the top line.
 `gt` / `gT` next / previous tab page, `3gt` tab page 3, `:tabnew`, `:tabclose`, `<C-w>T` window to a new tab page.
-The cheatsheet, the generated keymaps and CVS diffs open in their own tab page: close them with `q` or `:tabclose`.
+The generated keymaps (`:Keymaps`) and CVS diffs open in their own tab page: close them with `q` or `:tabclose`.
+The cheatsheet and the learning plan open as normal buffers: `<S-h>` / `<S-l>` reach them, `q` closes them.
 
 ### Sessions [C]
 `<leader>qs` restore the session for this folder, `<leader>ql` the last one, `<leader>qS` select one, `<leader>qd` do not save this session.

@@ -1,29 +1,26 @@
 -- Learning helpers. All keys under <leader>h.
---   :Cheatsheet  (<leader>hc)  curated cheatsheet: doc/cheatsheet.md (new tab, q closes)
+--   :Cheatsheet  (<leader>hc)  curated cheatsheet: doc/cheatsheet.md
 --   :LearnPlan   (<leader>hl)  learning plan with checkboxes: doc/learning-plan.md (edit + :w)
+--                Both open as buffers in the current window (<S-h>/<S-l> reach them);
+--                q closes the buffer (asks to save if modified).
 --   :Keymaps     (<leader>hk)  generated table of every keymap in this config (file:line)
 --   :Drill[!]    (<leader>hd)  (re)create the practice sandbox ~/nvim-drill (copies of zon
 --                              files in a git repo). ! = reset without asking.
 local m = require('helpers.map')
 local doc_dir = vim.fn.stdpath('config') .. '/doc/'
 
-local function open_doc(name, closable)
-    local path = doc_dir .. name
-    for _, tab in ipairs(vim.api.nvim_list_tabpages()) do
-        for _, w in ipairs(vim.api.nvim_tabpage_list_wins(tab)) do
-            if vim.api.nvim_buf_get_name(vim.api.nvim_win_get_buf(w)) == path then
-                vim.api.nvim_set_current_tabpage(tab)
-                return vim.api.nvim_set_current_win(w)
-            end
-        end
-    end
-    vim.cmd('tabedit ' .. vim.fn.fnameescape(path))
-    vim.wo.spell = false
-    vim.wo.wrap = false
-    vim.wo.conceallevel = 0
-    if closable then
-        vim.keymap.set('n', 'q', '<cmd>tabclose<CR>', { buffer = 0, desc = 'Close cheatsheet' })
-    end
+-- Open a doc as a normal buffer in the current window (it joins the buffer line).
+local function open_doc(name)
+    vim.cmd.edit(vim.fn.fnameescape(doc_dir .. name))
+    vim.wo[0][0].spell = false
+    vim.wo[0][0].wrap = false
+    vim.wo[0][0].conceallevel = 0
+    vim.keymap.set(
+        'n',
+        'q',
+        function() Snacks.bufdelete() end,
+        { buffer = 0, desc = 'Close this doc buffer' }
+    )
 end
 
 ----------------------------------------
@@ -77,7 +74,7 @@ local function show_keymaps()
     vim.bo[buf].bufhidden = 'wipe'
     vim.bo[buf].filetype = 'markdown'
     vim.bo[buf].modifiable = false
-    vim.wo.spell = false
+    vim.wo[0][0].spell = false
     pcall(vim.api.nvim_buf_set_name, buf, 'keymaps://generated')
     vim.keymap.set('n', 'q', '<cmd>tabclose<CR>', { buffer = buf })
 end
@@ -136,14 +133,10 @@ end
 local cmd = vim.api.nvim_create_user_command
 cmd(
     'Cheatsheet',
-    function() open_doc('cheatsheet.md', true) end,
+    function() open_doc('cheatsheet.md') end,
     { desc = 'Open the curated cheatsheet' }
 )
-cmd(
-    'LearnPlan',
-    function() open_doc('learning-plan.md', false) end,
-    { desc = 'Open the learning plan' }
-)
+cmd('LearnPlan', function() open_doc('learning-plan.md') end, { desc = 'Open the learning plan' })
 cmd('Keymaps', show_keymaps, { desc = 'Generated table of all config keymaps' })
 cmd(
     'Drill',
